@@ -54,3 +54,17 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+##
+
+- Para lanzar el dispositivo virtual IOS
+
+```
+eas build --platform ios --profile development
+```
+
+- Para lanzar el dispositivo virtual Android
+
+```
+eas build --platform android --profile development
+```
