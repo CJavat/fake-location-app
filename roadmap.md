@@ -88,3 +88,23 @@ Para mantener el proyecto escalable y limpio, estructuraremos el código de la s
 ├── /types            # Definiciones estrictas de TypeScript (.d.ts)
 └── /utils            # Formateadores de coordenadas, cálculos de distancia
 ```
+
+---
+
+## Funcionalidades por estructurar
+
+1. Icono de buscador (mandar a otra screen o en la misma poder escribir la dirección)
+2. Botón de favoritos
+3. Pantalla de ubicaciones favoritas.
+4. Botón de recientes (Ver las ubicaciones que recientemente se han buscado - Máximo 10 ubicaciones)
+5. Pantalla de ayuda
+6. Pantalla principal tendría estas cosas.
+   - Header
+     - Botón - para eliminar anuncios (Llevará a página de suscripción)
+     - Botón - Chat de ayuda
+     - Botón - Screen de tutorial
+   - Main ()
+     - Botón para ir a la screen de cambiar ubicación
+     - Botón para ir a ubicaciones recientes
+     - Botón para ir a ubicaciones favoritas
+7. Joystick (para poder simular que el usuario va caminando).
