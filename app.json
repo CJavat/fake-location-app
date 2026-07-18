@@ -45,13 +45,9 @@
           "imageWidth": 76
         }
       ],
-      [
-        "@rnmapbox/maps",
-        {
-          "RNMapboxMapsImpl": "mapbox",
-          "RNMapboxMapsDownloadToken": ""
-        }
-      ]
+      "@rnmapbox/maps",
+      "@react-native-vector-icons/ionicons",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
