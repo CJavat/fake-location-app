@@ -19,7 +19,7 @@ Este documento detalla la planificación, arquitectura, objetivos técnicos y fe
 
 ## 📅 Cronograma y Entregables Técnicos
 
-### 📌 Hito 1: Cimientos de la App y Configuración Nativa
+### 📌 Hito 1: Cimientos de la App y Configuración Nativa _(TERMINADO)_
 
 > **Fecha Límite:** 20 de julio de 2026
 
@@ -45,6 +45,7 @@ Este documento detalla la planificación, arquitectura, objetivos técnicos y fe
   - Crear un marcador dinámico en las coordenadas elegidas.
 - **Buscador de Direcciones:** Integrar la API de Geocoding de Mapbox para buscar ubicaciones por texto (ej. "Torre Eiffel") y trasladar el mapa automáticamente.
 - **Almacenamiento Local:** Integrar `react-native-mmkv` para guardar el historial de ubicaciones simuladas e iniciar la app siempre en el último punto configurado.
+- **Implementación de Axios:** Implementar Axios para el manejo de las peticiones a _Mapbox_.
 
 ---
 
@@ -108,3 +109,4 @@ Para mantener el proyecto escalable y limpio, estructuraremos el código de la s
      - Botón para ir a ubicaciones recientes
      - Botón para ir a ubicaciones favoritas
 7. Joystick (para poder simular que el usuario va caminando).
+8. Agregar simulador de caminata. Agregar _PuntoA_ al _PuntoB_ y se vaya moviendo el puntero.

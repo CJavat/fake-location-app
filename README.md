@@ -57,14 +57,38 @@ Join our community of developers creating universal apps.
 
 ##
 
-- Para lanzar el dispositivo virtual IOS
+- Para lanzar el dispositivo virtual **IOS** _(Servidores de Expo)_
 
 ```
 eas build --platform ios --profile development
 ```
 
-- Para lanzar el dispositivo virtual Android
+- Para lanzar el dispositivo virtual **Android** _(Servidores de Expo)_
 
 ```
 eas build --platform android --profile development
+```
+
+- Correr proyecto de Expo para que funcionen las opciones de EAS
+
+```
+npx expo start
+```
+
+- Si ocurré un error en el prebuild hacer
+
+```
+npx expo prebuild --clean
+```
+
+- Correr proyecto local en **Android**
+
+```
+npm run android
+```
+
+- Correr proyecto local en **IOS**
+
+```
+npm run ios
 ```
