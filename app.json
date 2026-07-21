@@ -55,7 +55,8 @@
         {
           "locationWhenInUsePermission": "Permitimos tu ubicación para centrar el mapa en tu posición actual."
         }
-      ]
+      ],
+      "./plugins/withDisableMockLocationLint"
     ],
     "experiments": {
       "typedRoutes": true,
