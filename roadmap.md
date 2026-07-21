@@ -53,6 +53,7 @@ Este documento detalla la planificación, arquitectura, objetivos técnicos y fe
 
 > **Fecha Límite:** 30 de julio de 2026
 
+- **Screen de Favoritos:** Crear la pantalla para las ubicaciones que fueron guardadas como favoritas, hacer la acción de cuando seleccione la dirección lo mande a la pantalla para que simule esa ubicación.
 - **Módulo Nativo de Simulación:** Implementar o adaptar el puente nativo Java/Kotlin que interactúa con el `LocationManager` para simular el proveedor de GPS (`GPS_PROVIDER`).
 - **Bucle de Fondo Anti-Rebote:**
   - Configurar un servicio en primer plano (_Foreground Service_) que mantenga un hilo de ejecución continuo.

@@ -14,13 +14,9 @@ import {
 import Ionicons from "@react-native-vector-icons/ionicons";
 
 import { updateLocationQuery } from "@/actions/location.action";
-import {
-  addRecentSearch,
-  getRecentSearches,
-  type LocationItem,
-} from "@/lib/storage";
+import { addRecentSearch, getRecentSearches } from "@/lib/storage";
 
-import type { SearchResults } from "@/interfaces";
+import type { LocationItem, SearchResults } from "@/interfaces";
 
 interface SearchModalProps {
   visible: boolean;
@@ -54,8 +50,7 @@ export const SearchModal = ({
     const handler = setTimeout(async () => {
       try {
         const data = await updateLocationQuery(query, userLocation);
-
-        setResults(data.features || []);
+        setResults(data || []);
       } catch (error) {
         console.error("Error fetching geocoding:", error);
       }

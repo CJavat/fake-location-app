@@ -1,37 +1,40 @@
-import { StyleSheet, Alert, View, Platform } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { router } from "expo-router";
 
 import { IoniconPressable } from "../IoniconPressable";
 
 interface MapControlsProps {
   onLocateUser: () => void;
   onJoystickPress: () => void;
-  onFavoritesPress: () => void;
 }
 
 export const MapControls = ({
   onLocateUser,
   onJoystickPress,
-  onFavoritesPress,
 }: MapControlsProps) => {
+  const handleNavigateToFavorites = () => {
+    router.push("/favorites");
+  };
+
   return (
     <View style={styles.containerMapControls}>
       <IoniconPressable
         iconName="game-controller-outline"
-        iconSize={17}
+        iconSize={25}
         lineBottom={true}
         action={() => onJoystickPress}
       />
 
       <IoniconPressable
         iconName="star-outline"
-        iconSize={17}
+        iconSize={25}
         lineBottom={true}
-        action={() => onFavoritesPress}
+        action={handleNavigateToFavorites}
       />
 
       <IoniconPressable
         iconName="locate-outline"
-        iconSize={17}
+        iconSize={25}
         action={() => onLocateUser()}
       />
     </View>
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
   containerMapControls: {
     position: "absolute",
     bottom: 20,
-    right: 20,
+    right: 10,
     backgroundColor: "#ffffff",
     borderRadius: 15,
     padding: 10,

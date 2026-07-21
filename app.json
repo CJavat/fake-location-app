@@ -8,7 +8,6 @@
     "scheme": "fakelocationapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "newArchEnabled": true,
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.cjavatx.fakelocationapp",
       "infoPlist": {
@@ -16,7 +15,6 @@
       }
     },
     "android": {
-      "newArchEnabled": true,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -30,7 +28,9 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_MOCK_LOCATION",
         "android.permission.FOREGROUND_SERVICE",
-        "android.permission.FOREGROUND_SERVICE_LOCATION"
+        "android.permission.FOREGROUND_SERVICE_LOCATION",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.WAKE_LOCK"
       ]
     },
     "web": {

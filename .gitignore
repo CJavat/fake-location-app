@@ -45,3 +45,5 @@ example
 
 .claude/
 .vscode/
+
+*.apk

@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import Ionicons from "@react-native-vector-icons/ionicons";
 
 import { isFavorite, toggleFavorite } from "@/lib/storage";
+import {
+  onFakeLocationStopped,
+  openDeveloperOptions,
+  startFakeLocation,
+  stopFakeLocation,
+} from "@/services/mock-location.service";
+
+import { MockLocationPermissionModal } from "./MockLocationPermissionModal";
 
 import type { LocationItem } from "@/interfaces";
 
@@ -13,14 +21,47 @@ interface Props {
 
 export const BottomPanel = ({ locationItem, coordinates }: Props) => {
   const [isFav, setIsFav] = useState(() => isFavorite(locationItem.id));
+  const [isSimulating, setIsSimulating] = useState<boolean>(false);
+  const [showMockLocationHelp, setShowMockLocationHelp] = useState(false);
 
   useEffect(() => {
     setIsFav(isFavorite(locationItem.id));
   }, [locationItem.id]);
 
+  useEffect(() => {
+    return onFakeLocationStopped(() => setIsSimulating(false));
+  }, []);
+
   const handleToggleFavorite = () => {
     toggleFavorite(locationItem);
     setIsFav((prev) => !prev);
+  };
+
+  const handleStartSimulation = async (lat: number, lon: number) => {
+    const result = await startFakeLocation(lat, lon);
+
+    if (!result.success) {
+      if (result.reason === "mock-location-app-not-selected") {
+        setShowMockLocationHelp(true);
+        return;
+      }
+
+      const message =
+        result.reason === "permission-denied"
+          ? "Debes conceder acceso a tu ubicación para poder simular una ubicación falsa."
+          : (result.message ??
+            "No se pudo iniciar la simulación de ubicación.");
+
+      Alert.alert("No se pudo simular la ubicación", message);
+      return;
+    }
+
+    setIsSimulating(true);
+  };
+
+  const handleStopSimulation = () => {
+    setIsSimulating(false);
+    stopFakeLocation();
   };
 
   return (
@@ -60,13 +101,33 @@ export const BottomPanel = ({ locationItem, coordinates }: Props) => {
           <Ionicons name={isFav ? "star" : "star-outline"} size={16} />
         </Pressable>
 
-        <Pressable
-          style={styles.simulateButton}
-          onPress={() => console.log("Botón SIMULAR UBICACIÓN presionado")}
-        >
-          <Text style={styles.simulateTextButton}>Simular ubicación</Text>
-        </Pressable>
+        {isSimulating ? (
+          <Pressable
+            style={styles.stopSimulateButton}
+            onPress={handleStopSimulation}
+          >
+            <Text style={styles.simulateTextButton}>Detener simulación</Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            style={styles.simulateButton}
+            onPress={() =>
+              handleStartSimulation(
+                +coordinates[1].toFixed(6),
+                +coordinates[0].toFixed(6),
+              )
+            }
+          >
+            <Text style={styles.simulateTextButton}>Simular ubicación</Text>
+          </Pressable>
+        )}
       </View>
+
+      <MockLocationPermissionModal
+        visible={showMockLocationHelp}
+        onClose={() => setShowMockLocationHelp(false)}
+        onOpenSettings={openDeveloperOptions}
+      />
     </View>
   );
 };
@@ -98,6 +159,12 @@ const styles = StyleSheet.create({
   simulateButton: {
     flexGrow: 1,
     backgroundColor: "#162A33",
+    padding: 15,
+    borderRadius: 5,
+  },
+  stopSimulateButton: {
+    flexGrow: 1,
+    backgroundColor: "#FF2C2C",
     padding: 15,
     borderRadius: 5,
   },
