@@ -1,0 +1,19 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="expo.modules.mocklocation" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+6
+7    <application>
+7-->/Users/cjavatz/Dev/Proyectos/fake-location-app/modules/expo-mock-location/android/src/main/AndroidManifest.xml:2:3-7:17
+8        <service
+8-->/Users/cjavatz/Dev/Proyectos/fake-location-app/modules/expo-mock-location/android/src/main/AndroidManifest.xml:3:5-6:34
+9            android:name="expo.modules.mocklocation.MockLocationForegroundService"
+9-->/Users/cjavatz/Dev/Proyectos/fake-location-app/modules/expo-mock-location/android/src/main/AndroidManifest.xml:4:7-52
+10            android:exported="false"
+10-->/Users/cjavatz/Dev/Proyectos/fake-location-app/modules/expo-mock-location/android/src/main/AndroidManifest.xml:6:7-31
+11            android:foregroundServiceType="location" />
+11-->/Users/cjavatz/Dev/Proyectos/fake-location-app/modules/expo-mock-location/android/src/main/AndroidManifest.xml:5:7-47
+12    </application>
+13
+14</manifest>

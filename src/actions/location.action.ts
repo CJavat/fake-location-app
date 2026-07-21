@@ -1,6 +1,10 @@
 import { api } from "@/lib/api";
 
-import type { CoordsResults, SearchResults } from "@/interfaces";
+import type {
+  CoordsResults,
+  MapboxPlacesResponse,
+  SearchResults,
+} from "@/interfaces";
 
 type LocationPayload = {
   latitude: number;
@@ -22,13 +26,13 @@ export async function updateLocation(
 export async function updateLocationQuery(
   query: string,
   userLocation?: [number, number],
-): Promise<SearchResults> {
+): Promise<SearchResults[]> {
   const proximity = userLocation
     ? `&proximity=${userLocation[0]},${userLocation[1]}`
     : "";
-  const { data } = await api.get<SearchResults>(
+  const { data } = await api.get<MapboxPlacesResponse>(
     `/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxToken}&autocomplete=true&language=es${proximity}`,
   );
 
-  return data;
+  return data.features;
 }

@@ -3,6 +3,7 @@ import { Alert, Platform, StatusBar, StyleSheet, View } from "react-native";
 
 import Mapbox from "@rnmapbox/maps";
 import * as ExpoLocation from "expo-location";
+import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
@@ -12,7 +13,8 @@ import {
   SearchModal,
 } from "@/components";
 import { updateLocation } from "@/actions/location.action";
-import { CoordsResults } from "@/interfaces";
+
+import type { CoordsResults } from "@/interfaces";
 
 const mapboxToken = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN ?? "";
 Mapbox.setAccessToken(mapboxToken ?? "");
@@ -29,6 +31,8 @@ export default function HomeScreen() {
   const [isUserInteracting, setIsUserInteracting] = useState<boolean>(false);
   const [zoom, setZoom] = useState<number>(15);
   const [isSearchModalVisible, setIsSearchModalVisible] = useState(false);
+
+  const params = useLocalSearchParams<{ lat?: string; lon?: string }>();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -54,6 +58,23 @@ export default function HomeScreen() {
 
     fetchAddress();
   }, [debouncedCoords]);
+
+  useEffect(() => {
+    if (params.lat && params.lon) {
+      const targetLon = parseFloat(params.lon);
+      const targetLat = parseFloat(params.lat);
+
+      setCoordinates([targetLon, targetLat]);
+
+      cameraRef.current?.setCamera({
+        centerCoordinate: [targetLon, targetLat],
+        zoomLevel: 16,
+        animationDuration: 1000,
+      });
+
+      router.setParams({ lat: undefined, lon: undefined });
+    }
+  }, [params.lat, params.lon]);
 
   const onRegionWillChange = () => {
     setIsUserInteracting(true);
@@ -173,7 +194,6 @@ export default function HomeScreen() {
         <MapControls
           onLocateUser={goToCurrentLocation}
           onJoystickPress={() => console.log("Botón Joystick Presionado")}
-          onFavoritesPress={() => console.log("Botón Favoritos Presionado")}
         />
       </View>
 
